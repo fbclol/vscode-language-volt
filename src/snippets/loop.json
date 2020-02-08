@@ -1,0 +1,45 @@
+{
+
+    "loop index": {
+        "prefix": "loop.index",
+        "body": "{{ loop.index }}",
+        "description": "loop.index",
+        "scope": "text.html.volt"
+      },
+      "loop index0": {
+        "prefix": "loop.index0",
+        "body": "{{ loop.index0 }}",
+        "description": "loop.index0",
+        "scope": "text.html.volt"
+      },
+      "loop revindex": {
+        "prefix": "loop.revindex",
+        "body": "{{ loop.revindex }}",
+        "description": "loop.revindex",
+        "scope": "text.html.volt"
+      },
+      "loop revindex0": {
+        "prefix": "loop.revindex0",
+        "body": "{{ loop.revindex0 }}",
+        "description": "loop.revindex0",
+        "scope": "text.html.volt"
+      },
+      "loop.first": {
+        "prefix": "loop.first",
+        "body": "{% if loop.first %}",
+        "description": "loop.first",
+        "scope": "text.html.volt"
+      },
+      "loop.last": {
+        "prefix": "loop.last",
+        "body": "{% if loop.last %}",
+        "description": "loop.last",
+        "scope": "text.html.volt"
+      },
+      "loop.length": {
+        "prefix": "loop.length",
+        "body": "{% if loop.length %}",
+        "description": "loop.length",
+        "scope": "text.html.volt"
+      },
+}

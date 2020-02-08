@@ -1,0 +1,68 @@
+{
+    "defined": {
+        "text": "defined",
+        "prefix": "defined",
+        "body": "defined",
+        "description": "(test) Checks if a variable is defined (isset())"
+    },
+    "divisibleby": {
+        "text": "divisibleby",
+        "prefix": "divisibleby",
+        "body": "divisibleby",
+        "description": "(test) Checks if a value is divisible by other value"
+    },
+    "empty": {
+        "text": "empty",
+        "prefix": "empty",
+        "body": "empty",
+        "description": "(test) Checks if a variable is empty"
+    },
+    "even": {
+        "text": "even",
+        "prefix": "even",
+        "body": "even",
+        "description": "(test) Checks if a numeric value is even"
+    },
+    "iterable": {
+        "text": "iterable",
+        "prefix": "iterable",
+        "body": "iterable",
+        "description": "(test) Checks if a value is iterable. Can be traversed by a ‘for’ statement"
+    },
+    "numeric": {
+        "text": "numeric",
+        "prefix": "numeric",
+        "body": "numeric",
+        "description": "(test) Checks if value is numeric"
+    },
+    "odd": {
+        "text": "odd",
+        "prefix": "odd",
+        "body": "odd",
+        "description": "(test) Checks if a numeric value is odd"
+    },
+    "sameas": {
+        "text": "sameas",
+        "prefix": "sameas",
+        "body": "sameas",
+        "description": "(test) Checks if a value is identical to other value"
+    },
+    "scalar": {
+        "text": "scalar",
+        "prefix": "scalar",
+        "body": "scalar",
+        "description": "(test) Checks if value is scalar (not an array or object)"
+    },
+    "type": {
+        "text": "type",
+        "prefix": "type",
+        "body": "type",
+        "description": "(test) Checks if a value is of the specified type"
+    },
+    "not": {
+        "text": "not",
+        "prefix": "not",
+        "body": "not",
+        "description": "(statement) Negates"
+    }
+}

@@ -1,0 +1,160 @@
+{
+    "abs": {
+        "prefix": "abs",
+        "text": "abs",
+        "body": "abs",
+        "description": "Applies the abs PHP function to a value."
+    },
+    "capitalize": {
+        "prefix": "capitalize",
+        "text": "capitalize",
+        "body": "capitalize",
+        "description":
+            "Capitalizes a string by applying the ucwords PHP function to the value"
+    },
+    "convert_encoding": {
+        "prefix": "convert_encoding",
+        "body": "convert_encoding('${1:to}', '${2:from}')",
+        "text": "convert_encoding('to', 'from')",
+        "description": "Converts a string from one charset to another"
+    },
+    "default": {
+        "prefix": "default",
+        "body": "default('${1:default_value}')",
+        "text": "default('default value')",
+        "description": "Sets a default value in case the evaluated expression is empty, not set or evaluates to falsy value"
+    },
+    "escape": {
+        "prefix": "escape",
+        "text": "escape",
+        "body": "escape",
+        "description":
+            "Applies Phalcon\\Escaper->escapeHtml() to the value."
+    },
+    "escape_attr": {
+        "prefix": "escape_attr",
+        "text": "escape_attr",
+        "body": "escape_attr",
+        "description":
+            "Applies Phalcon\\Escaper->escapeCss() to the value"
+    },
+    "escape_js": {
+        "prefix": "escape_js",
+        "text": "escape_js",
+        "body": "escape_js",
+        "description":
+            "Applies Phalcon\\Escaper->escape_js() to the value"
+    },
+    "format": {
+        "prefix": "format",
+        "body": "format($1)",
+        "text": "format()",
+        "description":
+            "Formats a string using sprintf.",
+        "example":
+            "{% set foo = \"foo\" %}\n{{ \"I like %s and %s.\"| format(foo, \"bar\") }}\n\n{# outputs I like foo and bar #}"
+    },
+    "json_encode": {
+        "prefix": "json_encode",
+        "body": "json_encode",
+        "text": "json_encode",
+        "description":
+            "Converts a value into its JSON representation"
+    },
+    "json_decode": {
+        "prefix": "json_decode",
+        "body": "json_decode",
+        "text": "json_decode",
+        "description":
+            "Converts a value from its JSON representation to a PHP representation"
+    },
+    "join": {
+        "prefix": "join",
+        "body": "join('$1')",
+        "text": "join",
+        "description":
+            "Joins the array parts using a separator join"
+    },
+    "keys": {
+        "prefix": "keys",
+        "text": "keys",
+        "body": "keys",
+        "description":
+            "Returns the array keys using array_keys"
+    },
+    "left_trim": {
+        "prefix": "left_trim",
+        "text": "left_trim",
+        "body": "left_trim",
+        "description":
+            "Applies the ltrim PHP function to the value. Removing extra spaces"
+    },
+    "length": {
+        "prefix": "length",
+        "text": "length",
+        "body": "length",
+        "description":
+            "Counts the string length or how many items are in an array or object"
+    },
+    "lower": {
+        "prefix": "lower",
+        "text": "lower",
+        "body": "lower",
+        "description": "Change the case of a string to lowercase"
+    },
+    "nl2br": {
+        "prefix": "nl2br",
+        "text": "nl2br",
+        "body": "nl2br",
+        "description":
+            "Changes newlines \\n by line breaks (<br />). Uses the PHP function nl2br"
+    },
+    "right_trim": {
+        "prefix": "right_trim",
+        "text": "right_trim",
+        "body": "right_trim",
+        "description":
+            "Applies the rtrim PHP function to the value. Removing extra spaces"
+    },
+    "sort": {
+        "prefix": "sort",
+        "text": "sort",
+        "body": "sort",
+        "description":
+            "Sorts an array using the PHP function asort"
+    },
+    "stripslashes ": {
+        "prefix": "stripslashes",
+        "text": "stripslashes",
+        "body": "stripslashes",
+        "description":
+            "Applies the stripslashes PHP function to the value. Removing escaped quotes"
+    },
+    "striptags ": {
+        "prefix": "striptags",
+        "text": "striptags",
+        "body": "striptags",
+        "description":
+            "Applies the striptags PHP function to the value. Removing HTML tags"
+    },
+    "trim": {
+        "prefix": "trim",
+        "text": "trim",
+        "body": "trim",
+        "description":
+            "Applies the trim PHP function to the value. Removing extra spaces"
+    },
+    "upper": {
+        "prefix": "upper",
+        "text": "upper",
+        "body": "upper",
+        "description": "Change the case of a string to uppercase"
+    },
+    "url_encode": {
+        "prefix": "url_encode",
+        "text": "url_encode",
+        "body": "url_encode",
+        "description":
+            "Applies the urlencode PHP function to the value"
+    }
+}

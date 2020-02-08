@@ -1,0 +1,387 @@
+{
+  "Comment": {
+    "prefix": "comment",
+    "description": "Comment block",
+    "body": [
+      "{# $1",
+      "\t$2",
+      "#}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "var": {
+    "prefix": "var",
+    "description": "Empty Var",
+    "body": [
+      "{{ $1 }}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "encode var": {
+    "prefix": "encode var",
+    "description": "json encode Var",
+    "body": [
+      "{% set encoded = $1|json_encode %}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "decode  var": {
+    "prefix": "decode var",
+    "description": "json decode Var",
+    "body": [
+      "{% set decode = $1|json_decode %}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "tag": {
+    "prefix": "tag",
+    "description": "Empty tag",
+    "body": [
+      "{% $1 %}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "extends": {
+    "prefix": "extends",
+    "body": "{% extends \"${1:filename}.volt\" %}",
+    "description": "Volt snippets",
+    "scope": "text.html.volt"
+  },
+  "for else": {
+    "prefix": "for else",
+    "body": [
+      "{% for ${1:row} in ${2:array} %}",
+      "\t$3",
+      "{% else %}",
+      "\t$4",
+      "{% endfor %}"
+    ],
+    "description": "for ... else",
+    "scope": "text.html.volt"
+  },
+  "for": {
+    "prefix": "for",
+    "body": [
+      "{% for ${1:row} in ${2:array} %}",
+      "\t$3",
+      "{% endfor %}"
+    ],
+    "description": "Loop over each item in a sequence",
+    "scope": "text.html.volt"
+  },
+  "For loop": {
+    "prefix": "for",
+    "description": "For loop",
+    "body": [
+      "{% for $1 in $2 %}",
+      "$3",
+      "{% endfor %}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "For key": {
+    "prefix": "for key",
+    "description": "For loop you can get the element keys as in the PHP counterpart using the following syntax",
+    "body": [
+      "{% for ${1:name},${2:value} in $3 %}",
+      "$4",
+      "{% endfor %}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "For if": {
+    "prefix": "for if",
+    "description": "For loop you can get if evaluation",
+    "body": [
+      "{% for ${1:row} in ${2:array} if ${3:condition} %}",
+      "\t$4",
+      "{% endfor %}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "For loop nested": {
+    "prefix": "for",
+    "description": "For loop be nested",
+    "body": [
+      "{% for $1 in $2 %}",
+      "    {% for $3 in $1.$3 %}",
+      "        {{ $4 }}",
+      "    {% endfor %}",
+      "{% endfor %}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "for if else": {
+    "prefix": "for if else",
+    "body": [
+      "{% for ${1:row} in ${2:array} if ${3:condition} %}",
+      "\t$4",
+      "{% else %}",
+      "\t$5",
+      "{% endfor %}"
+    ],
+    "description": "Loop over each item in a sequence",
+    "scope": "text.html.volt"
+  },
+  "If condition": {
+    "prefix": "if",
+    "description": "IF condition",
+    "body": [
+      "{% if $1 %}",
+      "$2",
+      "{% else %}",
+      "{% endif %}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "elseif condition": {
+    "prefix": "elseif",
+    "description": "elseif condition",
+    "body": "{% elseif ${1:condition} %}",
+    "scope": "text.html.volt"
+  },
+  "else": {
+    "prefix": "else",
+    "body": "{% else %}",
+    "description": "The if statement in Volt is comparable with the if statements of PHP",
+    "scope": "text.html.volt"
+  },
+  "if": {
+    "prefix": "if",
+    "body": "{% if ${1:condition} %}$2{% endif %}\n$0",
+    "description": "if",
+    "scope": "text.html.volt"
+  },
+  "ifb": {
+    "prefix": "ifb",
+    "body": "{% if ${1:condition} %}\n\t$0\n{% endif %}",
+    "description": "if (block)",
+    "scope": "text.html.volt"
+  },
+  "ife": {
+    "prefix": "ife",
+    "body": "{% if ${1:condition} %}\n\t$2\n{% else %}\n\t$0\n{% endif %}",
+    "description": "if ... else",
+    "scope": "text.html.volt"
+  },
+  "if1": {
+    "prefix": "if",
+    "body": "{% if ${1:condition} %}$0{% endif %}",
+    "description": "if",
+    "scope": "text.html.volt"
+  },
+  "endfor": {
+    "prefix": "endfor",
+    "body": "{% endfor %}$0",
+    "description": "endfor",
+    "scope": "text.html.volt"
+  },
+  "endif": {
+    "prefix": "endif",
+    "body": "{% endif %}$0",
+    "description": "endif",
+    "scope": "text.html.volt"
+  },
+  "macro": {
+    "prefix": "macro",
+    "body": "{%- macro ${1:name_function}(${2:params}) %}\n\t$0\n{%- endmacro %}",
+    "description": "macro",
+    "scope": "text.html.volt"
+  },
+  "endmacro": {
+    "prefix": "endmacro",
+    "body": "{%- endmacro %}$0",
+    "description": "endmacro",
+    "scope": "text.html.volt"
+  },
+  "Super": {
+    "prefix": "super",
+    "description": "Super block",
+    "body": [
+      "{{ super() }}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "if else": {
+    "prefix": "if else",
+    "body": [
+      "{% if ${1:condition} %}",
+      "\t$1",
+      "{% else %}",
+      "\t$2",
+      "{% endif %}"
+    ],
+    "description": "The if statement in Volt is comparable with the if statements of PHP",
+    "scope": "text.html.volt"
+  },
+  "Template Block": {
+    "prefix": "block",
+    "description": "Creates a block",
+    "body": [
+      "{% block ${1:template_name} %}",
+      "$2",
+      "{% endblock %}"
+    ],
+    "scope": "text.html.volt"
+  },
+  "endblock": {
+    "prefix": "endblock",
+    "body": "{% endblock %}$0",
+    "description": "endblock",
+    "scope": "text.html.volt"
+  },
+  "Static": {
+    "prefix": "static",
+    "description": "Static file",
+    "body": "{{ static('$1') }}",
+    "scope": "text.html.volt"
+  },
+  "set": {
+    "prefix": "set",
+    "body": "{% set ${1:name} = ${2:value} %}$0",
+    "description": "Assign values to variables",
+    "scope": "text.html.volt"
+  },
+  "switchb": {
+    "prefix": "switch",
+    "body": "{% switch ${1:variable} %}\n\n\t{% case \"${2:value1}\" %}\n\t\n\n\t{% case \"${3:value2}\" %}\n\t\n\n\t{% default %}\n\t\n\n{% endswitch %}\n$0",
+    "description": "switch",
+    "scope": "text.html.volt"
+  },
+  "switch": {
+    "prefix": "switch",
+    "body": "{% switch $1:variable %}\n\t$0",
+    "description": "switch",
+    "scope": "text.html.volt"
+  },
+  "block": {
+    "prefix": "block",
+    "body": "{% block ${1:name} %}\n\t$0\n{% endblock %}",
+    "description": "block",
+    "scope": "text.html.volt"
+  },
+  "blockf": {
+    "prefix": "blockf",
+    "body": "{{ block(\"${1:name}\") }}$0",
+    "description": "blockf",
+    "scope": "text.html.volt"
+  },
+  "url": {
+    "prefix": "url",
+    "body": "url(\"${1:path}\")$0",
+    "description": "url",
+    "scope": "text.html.volt"
+  },
+  "case": {
+    "prefix": "case",
+    "body": "{% case \"${1:value}\" %}\n\t$0",
+    "description": "case",
+    "scope": "text.html.volt"
+  },
+  "default": {
+    "prefix": "default",
+    "body": "{% default %}\n\t$0",
+    "description": "case",
+    "scope": "text.html.volt"
+  },
+  "break": {
+    "prefix": "break",
+    "body": "{% break %}\n\t$0",
+    "description": "break",
+    "scope": "text.html.volt"
+  },
+  "dump": {
+    "prefix": "dump",
+    "body": "<pre>\n\t{{ dump($1) }}\n</pre>\n$0",
+    "description": "(function) dumps information about a template variable. This is mostly useful to debug a template that does not behave as expected by introspecting its variables",
+    "scope": "text.html.volt"
+  },
+  "do": {
+    "prefix": "do",
+    "body": "{% do $1 %}$0",
+    "description": "The do tag works exactly like the regular variable expression ({{ ... }}) just that it doesn't print anything",
+    "example": "{% do 1 + 2 %}",
+    "scope": "text.html.volt"
+  },
+  "urla": {
+    "prefix": "urla",
+    "body": "url(\"${1:path}\", ${2:{foo:\"1\", bar:\"2\"\\}}, ${3:\"http\"}, ${4:false})$0",
+    "description": "url w/ arguments",
+    "scope": "text.html.volt"
+  },
+  "url": {
+    "prefix": "url",
+    "description": "URL tag",
+    "body": [
+      "url('${1:some-url-name}', ${2:arg})"
+    ],
+    "scope": "text.html.volt"
+  },
+  "cache": {
+    "prefix": "cache",
+    "body": "{% cache %}\n\t$1\n{% endcache %}\n$0",
+    "description": "cache",
+    "scope": "text.html.volt"
+  },
+  "endautoescape": {
+    "prefix": "endautoescape",
+    "body": "{% endautoescape %}$0",
+    "description": "endautoescape",
+    "scope": "text.html.volt"
+  },
+  "endcache": {
+    "prefix": "endcache",
+    "body": "{% endcache %}$0",
+    "description": "endcache",
+    "scope": "text.html.volt"
+  },
+  "include": {
+    "prefix": "include",
+    "body": "{% include \"${1:filename}.volt\" %}",
+    "description": "The include statement includes a template and returns the rendered content of that file into the current namespace",
+    "scope": "text.html.volt"
+  },
+  "inc": {
+    "prefix": "inc",
+    "body": "{% include \"${1:template}\" %}$0",
+    "description": "inc",
+    "scope": "text.html.volt"
+  },
+  "incp": {
+    "prefix": "include params",
+    "body": "{% include \"${1:template}\"${2: with ${3:params} }%}$0",
+    "description": "include w/ params",
+    "scope": "text.html.volt"
+  },
+  "inckv": {
+    "prefix": "include params",
+    "body": "{% include \"${1:template}\" with [\n\t${2:key}: ${3:\"${4:value}\"}\n] %}\n$0",
+    "description": "include w/ key/value",
+    "scope": "text.html.volt"
+  },
+  "endswitch": {
+    "prefix": "endswitch",
+    "body": "{% endswitch %}$0",
+    "description": "endswitch",
+    "scope": "text.html.volt"
+  },
+  "else if": {
+    "prefix": "else if",
+    "body": "{% elseif ${1:condition} %}",
+    "description": "The if statement in Volt is comparable with the if statements of PHP",
+    "scope": "text.html.volt"
+  },
+  "loop": {
+    "prefix": "loop",
+    "body": "loop.",
+    "description": "special variables inside of a for loop block",
+    "scope": "text.html.volt"
+  },
+  "constant": {
+    "prefix": "constant",
+    "body": "{{ constant('${1:const_name}') }}$1",
+    "description": "constant returns the constant value for a given string",
+    "example": "{{ some_date | date(constant('DATE_W3C')) }}\n{{ constant('Namespace\\Classname::CONSTANT_NAME') }}",
+    "scope": "text.html.volt"
+  }
+}

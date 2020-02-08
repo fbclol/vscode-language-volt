@@ -1,0 +1,407 @@
+{
+    "name": "volt-phalcon-language",
+    "displayName": "volt phalcon language",
+    "description": "Snippets, Syntax Highlighting, Hover, Completion, and Formatting for Volt",
+    "version": "1.2.0",
+    "publisher": "fbclol",
+    "license": "MIT",
+    "author": {
+        "name": "Franck Boué",
+        "email": "boue.franck@gmail.com",
+        "url": "https://fbclol.fr"
+    },
+    "homepage": "https://github.com/fbclol/vscode-language-volt",
+    "bugs": {
+        "url": "https://github.com/fbclol/vscode-language-volt/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/fbclol/vscode-language-volt.git"
+    },
+    "icon": "images/icon.png",
+    "engines": {
+        "vscode": "^1.30.0"
+    },
+    "categories": [
+        "Formatters",
+        "Programming Languages",
+        "Snippets",
+        "Other"
+    ],
+    "keywords": [
+        "php",
+        "volt",
+        "snippets",
+        "craft",
+        "beautify"
+    ],
+    "activationEvents": [
+        "onLanguage:html",
+        "onLanguage:js.volt",
+        "onLanguage:volt",
+        "onLanguage:javascript"
+    ],
+    "main": "./extension/index",
+    "contributes": {
+        "languages": [
+            {
+                "id": "html",
+                "configuration": "./src/languages/volt.configuration.json"
+            },
+            {
+                "id": "volt",
+                "aliases": [
+                    "Volt (HTML)"
+                ],
+                "extensions": [
+                    ".volt",
+                    ".html.volt"
+                ],
+                "configuration": "./src/languages/volt.configuration.json"
+            },
+            {
+                "id": "javascript"
+            },
+            {
+                "id": "js.volt",
+                "aliases": [
+                    "Js (Volt)"
+                ],
+                "extensions": [
+                    ".js.volt"
+                ],
+                "configuration": "./src/languages/volt.configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "html",
+                "scopeName": "text.html.volt",
+                "path": "./src/syntaxes/volt.tmLanguage",
+                "embeddedLanguages": {
+                    "source.json": "json",
+                    "source.css": "css",
+                    "source.css.scss": "scss",
+                    "source.js": "javascript"
+                }
+            },
+            {
+                "language": "volt",
+                "scopeName": "text.html.volt",
+                "path": "./src/syntaxes/volt.tmLanguage",
+                "embeddedLanguages": {
+                    "source.json": "json",
+                    "source.css": "css",
+                    "source.css.scss": "scss",
+                    "source.js": "javascript"
+                }
+            },
+            {
+                "language": "js.volt",
+                "scopeName": "text.js.volt",
+                "path": "./src/syntaxes/javascript.tmLanguage",
+                "embeddedLanguages": {
+                    "source.json": "json",
+                    "source.css": "css",
+                    "source.css.scss": "scss",
+                    "source.js": "javascript"
+                }
+            },
+            {
+                "language": "javascript",
+                "scopeName": "source.js",
+                "path": "./src/syntaxes/javascript-surcharge.tmLanguage"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "html",
+                "path": "./src/snippets/volt.json"
+            },
+            {
+                "language": "js.volt",
+                "path": "./src/snippets/volt.json"
+            },
+            {
+                "language": "volt",
+                "path": "./src/snippets/volt.json"
+            },
+            {
+                "language": "javascript",
+                "path": "./src/snippets/volt.json"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Volt phalcon language",
+            "properties": {
+                "volt-phalcon-language.completionsVoltCustom": {
+                    "type": "string",
+                    "default": "./app/config/services.php",
+                    "description": "Whether to enable/disable service Volt custom by application."
+                },
+                "volt-phalcon-language.hover": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable/disable Volt hover."
+                },
+                "volt-phalcon-language.formatting": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable/disable Volt PrettyDiff formatting."
+                },
+                "volt-phalcon-language.completions": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable/disable Volt completions."
+                },
+                "volt-phalcon-language.braceLine": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If true an empty line will be inserted after opening curly braces and before closing curly braces."
+                },
+                "volt-phalcon-language.bracePadding": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Inserts a space after the start of a container and before the end of the container if the contents of that container are not indented; such as: conditions, function arguments, and escaped sequences of template strings."
+                },
+                "volt-phalcon-language.braceStyle": {
+                    "type": "string",
+                    "enum": [
+                        "collapse",
+                        "collapse-preserve-inline",
+                        "expand",
+                        "none"
+                    ],
+                    "default": "none",
+                    "description": "Emulates JSBeautify's brace_style option using existing Pretty Diff options."
+                },
+                "volt-phalcon-language.braces": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Determines if opening curly braces will exist on the same line as their condition or be forced onto a new line."
+                },
+                "volt-phalcon-language.commentLine": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If a blank new line should be forced above comments."
+                },
+                "volt-phalcon-language.comments": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "This will determine whether comments should always start at position 0 of each line or if comments should be indented according to the code."
+                },
+                "volt-phalcon-language.compressedCss": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If CSS should be beautified in a style where the properties and values are minifed for faster reading of selectors."
+                },
+                "volt-phalcon-language.correct": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Automatically correct some sloppiness in code."
+                },
+                "volt-phalcon-language.cssInsertLines": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Inserts new line characters between every CSS code block."
+                },
+                "volt-phalcon-language.elseLine": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If else_line is true then the keyword 'else' is forced onto a new line."
+                },
+                "volt-phalcon-language.endComma": {
+                    "type": "string",
+                    "enum": [
+                        "always",
+                        "never",
+                        "none"
+                    ],
+                    "default": false,
+                    "description": "If there should be a trailing comma in arrays and objects. Value multiline only applies to modes beautify and diff."
+                },
+                "volt-phalcon-language.forceAttribute": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If all markup attributes should be indented each onto their own line."
+                },
+                "volt-phalcon-language.forceIndent": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Will force indentation upon all content and tags without regard for the creation of new text nodes."
+                },
+                "volt-phalcon-language.formatArray": {
+                    "type": "string",
+                    "enum": [
+                        "default",
+                        "indent",
+                        "inline"
+                    ],
+                    "default": "default",
+                    "description": "Determines if all array indexes should be indented, never indented, or left to the default."
+                },
+                "volt-phalcon-language.formatObject": {
+                    "type": "string",
+                    "enum": [
+                        "default",
+                        "indent",
+                        "inline"
+                    ],
+                    "default": "default",
+                    "description": "Determines if all object keys should be indented, never indented, or left to the default."
+                },
+                "volt-phalcon-language.functionName": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If a space should follow a JavaScript function name."
+                },
+                "volt-phalcon-language.indentStyle": {
+                    "type": "string",
+                    "enum": [
+                        "space",
+                        "tab"
+                    ],
+                    "default": "tab",
+                    "description": "Choose to indent using tabs or spaces."
+                },
+                "volt-phalcon-language.indentLevel": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "How much indentation padding should be applied to beautification? This option is internally used for code that requires switching between libraries."
+                },
+                "volt-phalcon-language.tabSize": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "0 will default to the editor's tab size. Stores the number of 'inchar' values to comprise a single indentation."
+                },
+                "volt-phalcon-language.methodChain": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "When to break consecutively chained methods and properties onto separate lines. A negative value disables this option. A value of 0 ensures method chains are never broken."
+                },
+                "volt-phalcon-language.neverFlatten": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If destructured lists in script should never be flattend."
+                },
+                "volt-phalcon-language.newLine": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Insert an empty line at the end of output."
+                },
+                "volt-phalcon-language.noCaseIndent": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If a case statement should receive the same indentation as the containing switch block."
+                },
+                "volt-phalcon-language.noLeadZero": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether leading 0s in CSS values immediately preceeding a decimal should be removed or prevented."
+                },
+                "volt-phalcon-language.objectSort": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Sorts markup attributes and properties by key name in script and style."
+                },
+                "volt-phalcon-language.preserve": {
+                    "type": "integer",
+                    "default": 2,
+                    "description": "The maximum number of consecutive empty lines to retain."
+                },
+                "volt-phalcon-language.preserveComment": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Prevent comment reformatting due to option wrap."
+                },
+                "volt-phalcon-language.quoteConvert": {
+                    "type": "string",
+                    "enum": [
+                        "double",
+                        "none",
+                        "single"
+                    ],
+                    "default": "none",
+                    "description": "If the quotes of script strings or markup attributes should be converted to single quotes or double quotes."
+                },
+                "volt-phalcon-language.space": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Inserts a space following the function keyword for anonymous functions."
+                },
+                "volt-phalcon-language.spaceClose": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Markup self-closing tags end will end with ' />' instead of '/>'."
+                },
+                "volt-phalcon-language.tagMerge": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Allows immediately adjacement start and end markup tags of the same name to be combined into a single self-closing tag."
+                },
+                "volt-phalcon-language.tagSort": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Sort child items of each respective markup parent element."
+                },
+                "volt-phalcon-language.ternaryLine": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "If ternary operators in JavaScript ? and : should remain on the same line."
+                },
+                "volt-phalcon-language.unformatted": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If markup tags should have their insides preserved. This option is only available to markup and does not support child tokens that require a different lexer."
+                },
+                "volt-phalcon-language.variableList": {
+                    "type": "string",
+                    "enum": [
+                        "each",
+                        "list",
+                        "none"
+                    ],
+                    "default": "none",
+                    "description": "If consecutive JavaScript variables should be merged into a comma separated list or if variables in a list should be separated."
+                },
+                "volt-phalcon-language.vertical": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If lists of assignments and properties should be vertically aligned. This option is not used with the markup lexer."
+                },
+                "volt-phalcon-language.wrap": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Character width limit before applying word wrap. A 0 value disables this option. A negative value concatenates script strings."
+                }
+            }
+        }
+    },
+    "capabilities": {
+        "hoverProvider": "true"
+    },
+    "scripts": {
+        "start": "rollup -c",
+        "build": "rollup -c",
+        "watch": "rollup -c -w"
+    },
+    "devDependencies": {
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^12.12.7",
+        "eslint": "^6.6.0",
+        "eslint-config-prettier": "^6.5.0",
+        "typescript": "^3.7.2",
+        "vscode": "^1.1.36"
+    },
+    "dependencies": {
+        "filereader": "^0.10.3",
+        "fs": "0.0.1-security",
+        "n-readlines": "^1.0.0",
+        "path": "^0.12.7",
+        "prettydiff": "^101.2.6",
+        "rollup": "^1.26.3",
+        "rollup-plugin-babel": "^4.3.3",
+        "rollup-plugin-json": "^4.0.0"
+    }
+}
