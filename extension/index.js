@@ -97,27 +97,31 @@ function prettyDiff(document, range) {
 }
 function arrVoltCustom(filePath,type) {
     path.join(filePath);
-    let str = fs.readFileSync(filePath).toString();
     let voltCustomArray ={};
+    try {
+        let str = fs.readFileSync(filePath).toString();
+        let m;
+        var regex  = /(?=addFunction|addFilter)(.*?)(?=\(').*(?<=addFunction\(\'|addFilter\(\'|")(.*?)(?=\',)', .*\s*\w*\s*'(?<=', '|return ')(.*?)(?=\('|'\))/g;
 
-    let m;
-    var regex  = /(?=addFunction|addFilter)(.*?)(?=\(').*(?<=addFunction\(\'|addFilter\(\'|")(.*?)(?=\',)', .*\s*\w*\s*'(?<=', '|return ')(.*?)(?=\('|'\))/g;
-
-    while ((m = regex.exec(str)) !== null) {
-        if (m.index === regex.lastIndex) {
-            regex.lastIndex++;
-        }
-        if (m[1] == type) {
-            let body ;
-            if (m[1] == 'addFunction') {
-                body = m[2]+'()';
-            } else {
-                body = m[2];
+        while ((m = regex.exec(str)) !== null) {
+            if (m.index === regex.lastIndex) {
+                regex.lastIndex++;
             }
-            let obj = { 'body' : body , 'description' : m[3] ,'prefix' :m[2], 'text': m[2]};
-            voltCustomArray[m[2]] = obj;
+            if (m[1] == type) {
+                let body ;
+                if (m[1] == 'addFunction') {
+                    body = m[2]+'()';
+                } else {
+                    body = m[2];
+                }
+                let obj = { 'body' : body , 'description' : m[3] ,'prefix' :m[2], 'text': m[2]};
+                voltCustomArray[m[2]] = obj;
+            }
         }
+    } catch (error) {
+
     }
+
     return voltCustomArray;
 }
 

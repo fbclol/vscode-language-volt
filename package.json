@@ -2,7 +2,7 @@
     "name": "volt-phalcon-language",
     "displayName": "volt phalcon language",
     "description": "Snippets, Syntax Highlighting, Hover, Completion, and Formatting for Volt",
-    "version": "1.2.0",
+    "version": "1.2.2",
     "publisher": "fbclol",
     "license": "MIT",
     "author": {
