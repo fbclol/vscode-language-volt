@@ -1,0 +1,337 @@
+{
+    "name": "volt",
+    "scopeName": "source.volt",
+    "comment": "Volt Templates",
+    "foldingStartMarker": "({%\\s*(block|filter|for|if|macro|raw))",
+    "foldingStopMarker": "({%\\s*(endblock|endfilter|endfor|endif|endmacro|endraw)\\s*%})",
+    "patterns": [
+      {
+        "begin": "({%)\\s*(raw)\\s*(%})",
+        "captures": {
+          "1": {
+            "name": "entity.other.volt.delimiter.tag"
+          },
+          "2": {
+            "name": "keyword.control.volt"
+          },
+          "3": {
+            "name": "entity.other.volt.delimiter.tag"
+          }
+        },
+        "end": "({%)\\s*(endraw)\\s*(%})",
+        "name": "comment.block.volt.raw"
+      },
+      {
+        "begin": "{#-?",
+        "captures": [
+          {
+            "name": "entity.other.volt.delimiter.comment"
+          }
+        ],
+        "end": "-?#}",
+        "name": "comment.block.volt"
+      },
+      {
+        "begin": "{{-?",
+        "captures": [
+          {
+            "name": "entity.other.volt.delimiter.variable"
+          }
+        ],
+        "end": "-?}}",
+        "name": "meta.scope.volt.variable",
+        "patterns": [
+          {
+            "include": "#expression"
+          }
+        ]
+      },
+      {
+        "begin": "{%-?",
+        "captures": [
+          {
+            "name": "entity.other.volt.delimiter.tag"
+          }
+        ],
+        "end": "-?%}",
+        "name": "meta.scope.volt.tag",
+        "patterns": [
+          {
+            "include": "#expression"
+          }
+        ]
+      }
+    ],
+    "repository": {
+      "escaped_char": {
+        "match": "\\\\x[0-9A-F]{2}",
+        "name": "constant.character.escape.hex.volt"
+      },
+      "escaped_unicode_char": {
+        "captures": {
+          "1": {
+            "name": "constant.character.escape.unicode.16-bit-hex.volt"
+          },
+          "2": {
+            "name": "constant.character.escape.unicode.32-bit-hex.volt"
+          },
+          "3": {
+            "name": "constant.character.escape.unicode.name.volt"
+          }
+        },
+        "match": "(\\\\U[0-9A-Fa-f]{8})|(\\\\u[0-9A-Fa-f]{4})|(\\\\N\\{[a-zA-Z ]+\\})"
+      },
+      "expression": {
+        "patterns": [
+          {
+            "captures": {
+              "1": {
+                "name": "keyword.control.volt"
+              },
+              "2": {
+                "name": "variable.other.volt.block"
+              }
+            },
+            "match": "\\s*\\b(block)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b"
+          },
+          {
+            "captures": {
+              "1": {
+                "name": "keyword.control.volt"
+              },
+              "2": {
+                "name": "variable.other.volt.filter"
+              }
+            },
+            "match": "\\s*\\b(filter)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b"
+          },
+          {
+            "captures": {
+              "1": {
+                "name": "keyword.control.volt"
+              },
+              "2": {
+                "name": "variable.other.volt.test"
+              }
+            },
+            "match": "\\s*\\b(is)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b"
+          },
+          {
+            "captures": {
+              "1": {
+                "name": "keyword.control.volt"
+              }
+            },
+            "match": "(?<=\\{\\%-|\\{\\%)\\s*\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b(?!\\s*[,=])"
+          },
+          {
+            "match": "\\b(and|else|if|in|import|not|or|recursive|with(out)?\\s+context)\\b",
+            "name": "keyword.control.volt"
+          },
+          {
+                      "match": "\\b(true|false|none)\\b",
+            "name": "constant.language.volt"
+          },
+          {
+            "match": "\\b(loop|super|self|varargs|kwargs)\\b",
+            "name": "variable.language.volt"
+          },
+          {
+            "match": "[a-zA-Z_][a-zA-Z0-9_]*",
+            "name": "variable.other.volt"
+          },
+          {
+            "match": "(\\+|\\-|\\*\\*|\\*|\/\/|\/|%)",
+            "name": "keyword.operator.arithmetic.volt"
+          },
+          {
+            "captures": {
+              "1": {
+                "name": "punctuation.other.volt"
+              },
+              "2": {
+                "name": "variable.other.volt.filter"
+              }
+            },
+            "match": "(\\|)([a-zA-Z_][a-zA-Z0-9_]*)"
+          },
+          {
+            "captures": {
+              "1": {
+                "name": "punctuation.other.volt"
+              },
+              "2": {
+                "name": "variable.other.volt.attribute"
+              }
+            },
+            "match": "(\\.)([a-zA-Z_][a-zA-Z0-9_]*)"
+          },
+          {
+            "begin": "\\[",
+            "captures": [
+              {
+                "name": "punctuation.other.volt"
+              }
+            ],
+            "end": "\\]",
+            "patterns": [
+              {
+                "include": "#expression"
+              }
+            ]
+          },
+          {
+            "begin": "\\(",
+            "captures": [
+              {
+                "name": "punctuation.other.volt"
+              }
+            ],
+            "end": "\\)",
+            "patterns": [
+              {
+                "include": "#expression"
+              }
+            ]
+          },
+          {
+            "begin": "\\{",
+            "captures": [
+              {
+                "name": "punctuation.other.volt"
+              }
+            ],
+            "end": "\\}",
+            "patterns": [
+              {
+                "include": "#expression"
+              }
+            ]
+          },
+          {
+            "match": "(\\.|:|\\||,)",
+            "name": "punctuation.other.volt"
+          },
+          {
+            "match": "(==|<=|=>|<|>|!=)",
+            "name": "keyword.operator.comparison.volt"
+          },
+          {
+            "match": "=",
+            "name": "keyword.operator.assignment.volt"
+          },
+          {
+            "begin": "\"",
+            "beginCaptures": [
+              {
+                "name": "punctuation.definition.string.begin.volt"
+              }
+            ],
+            "end": "\"",
+            "endCaptures": [
+              {
+                "name": "punctuation.definition.string.end.volt"
+              }
+            ],
+            "name": "string.quoted.double.volt",
+            "patterns": [
+              {
+                "include": "#string"
+              }
+            ]
+          },
+          {
+            "begin": "'",
+            "beginCaptures": [
+              {
+                "name": "punctuation.definition.string.begin.volt"
+              }
+            ],
+            "end": "'",
+            "endCaptures": [
+              {
+                "name": "punctuation.definition.string.end.volt"
+              }
+            ],
+            "name": "string.quoted.single.volt",
+            "patterns": [
+              {
+                "include": "#string"
+              }
+            ]
+          },
+          {
+            "begin": "@\/",
+            "beginCaptures": [
+              {
+                "name": "punctuation.definition.regexp.begin.volt"
+              }
+            ],
+            "end": "\/",
+            "endCaptures": [
+              {
+                "name": "punctuation.definition.regexp.end.volt"
+              }
+            ],
+            "name": "string.regexp.volt",
+            "patterns": [
+              {
+                "include": "#simple_escapes"
+              }
+            ]
+          }
+        ]
+      },
+      "simple_escapes": {
+        "captures": {
+          "1": {
+            "name": "constant.character.escape.newline.volt"
+          },
+          "10": {
+            "name": "constant.character.escape.tab.volt"
+          },
+          "11": {
+            "name": "constant.character.escape.vertical-tab.volt"
+          },
+          "2": {
+            "name": "constant.character.escape.backlash.volt"
+          },
+          "3": {
+            "name": "constant.character.escape.double-quote.volt"
+          },
+          "4": {
+            "name": "constant.character.escape.single-quote.volt"
+          },
+          "5": {
+            "name": "constant.character.escape.bell.volt"
+          },
+          "6": {
+            "name": "constant.character.escape.backspace.volt"
+          },
+          "7": {
+            "name": "constant.character.escape.formfeed.volt"
+          },
+          "8": {
+            "name": "constant.character.escape.linefeed.volt"
+          },
+          "9": {
+            "name": "constant.character.escape.return.volt"
+          }
+        },
+        "match": "(\\\\\\n)|(\\\\\\\\)|(\\\\\\\")|(\\\\')|(\\\\a)|(\\\\b)|(\\\\f)|(\\\\n)|(\\\\r)|(\\\\t)|(\\\\v)"
+      },
+      "string": {
+        "patterns": [
+          {
+            "include": "#simple_escapes"
+          },
+          {
+            "include": "#escaped_char"
+          },
+          {
+            "include": "#escaped_unicode_char"
+          }
+        ]
+      }
+    }
+  }

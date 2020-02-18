@@ -127,9 +127,10 @@ function activate(context) {
     const active = vscode.window.activeTextEditor
     if (!active || !active.document) return
 
-    registerDocType('html');
-    registerDocType('js.volt');
     registerDocType('volt');
+    registerDocType('html.volt');
+    registerDocType('js.volt');
+    registerDocType('html');
     registerDocType('javascript');
 
 

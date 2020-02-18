@@ -1,0 +1,13 @@
+{
+    "name": "volt-js",
+    "scopeName": "source.js.volt",
+    "comment": "Volt JavaScript Templates",
+    "patterns": [
+      {
+        "include": "source.volt"
+      },
+      {
+        "include": "source.js"
+      }
+    ]
+  }

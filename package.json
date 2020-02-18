@@ -36,20 +36,23 @@
         "beautify"
     ],
     "activationEvents": [
-        "onLanguage:html",
-        "onLanguage:js.volt",
         "onLanguage:volt",
+        "onLanguage:html.volt",
+        "onLanguage:js.volt",
+        "onLanguage:html",
         "onLanguage:javascript"
     ],
     "main": "./extension/index",
     "contributes": {
         "languages": [
             {
-                "id": "html",
+                "id": "volt",
+                "aliases": ["Volt Raw", "volt-raw"],
+                "extensions": [],
                 "configuration": "./src/languages/volt.configuration.json"
             },
             {
-                "id": "volt",
+                "id": "html.volt",
                 "aliases": [
                     "Volt (HTML)"
                 ],
@@ -58,9 +61,6 @@
                     ".html.volt"
                 ],
                 "configuration": "./src/languages/volt.configuration.json"
-            },
-            {
-                "id": "javascript"
             },
             {
                 "id": "js.volt",
@@ -75,59 +75,32 @@
         ],
         "grammars": [
             {
-                "language": "html",
-                "scopeName": "text.html.volt",
-                "path": "./src/syntaxes/volt.tmLanguage",
-                "embeddedLanguages": {
-                    "source.json": "json",
-                    "source.css": "css",
-                    "source.css.scss": "scss",
-                    "source.js": "javascript"
-                }
+                "language": "volt",
+                "scopeName": "source.volt",
+                "path": "./src/syntaxes/volt.tmLanguage.json"
             },
             {
-                "language": "volt",
+                "language": "html.volt",
                 "scopeName": "text.html.volt",
-                "path": "./src/syntaxes/volt.tmLanguage",
-                "embeddedLanguages": {
-                    "source.json": "json",
-                    "source.css": "css",
-                    "source.css.scss": "scss",
-                    "source.js": "javascript"
-                }
+                "path": "./src/syntaxes/volt-html.tmLanguage.json"
             },
             {
                 "language": "js.volt",
-                "scopeName": "text.js.volt",
-                "path": "./src/syntaxes/javascript.tmLanguage",
-                "embeddedLanguages": {
-                    "source.json": "json",
-                    "source.css": "css",
-                    "source.css.scss": "scss",
-                    "source.js": "javascript"
-                }
-            },
-            {
-                "language": "javascript",
-                "scopeName": "source.js",
-                "path": "./src/syntaxes/javascript-surcharge.tmLanguage"
+                "scopeName": "source.js.volt",
+                "path": "./src/syntaxes/volt-js.tmLanguage.json"
             }
         ],
         "snippets": [
             {
-                "language": "html",
-                "path": "./src/snippets/volt.json"
-            },
-            {
-                "language": "js.volt",
-                "path": "./src/snippets/volt.json"
-            },
-            {
                 "language": "volt",
                 "path": "./src/snippets/volt.json"
             },
             {
-                "language": "javascript",
+                "language": "html.volt",
+                "path": "./src/snippets/volt.json"
+            },
+            {
+                "language": "js.volt",
                 "path": "./src/snippets/volt.json"
             }
         ],
