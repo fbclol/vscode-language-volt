@@ -82,12 +82,28 @@
             {
                 "language": "html.volt",
                 "scopeName": "text.html.volt",
-                "path": "./src/syntaxes/volt-html.tmLanguage.json"
+                "path": "./src/syntaxes/volt-html.tmLanguage.json",
+                "embeddedLanguages": {
+                    "text.html": "html",
+                    "source.css": "css",
+                    "source.js": "javascript"
+                },
+                "tokenTypes": {
+                    "meta.tag string.quoted": "other"
+                }
             },
             {
                 "language": "js.volt",
                 "scopeName": "source.js.volt",
-                "path": "./src/syntaxes/volt-js.tmLanguage.json"
+                "path": "./src/syntaxes/volt-js.tmLanguage.json",
+                "embeddedLanguages": {
+                    "text.html": "html",
+                    "source.css": "css",
+                    "source.js": "javascript"
+                },
+                "tokenTypes": {
+                    "meta.tag string.quoted": "other"
+                }
             }
         ],
         "snippets": [
