@@ -79,6 +79,7 @@
                 "scopeName": "text.html.volt",
                 "path": "./src/syntaxes/volt.tmLanguage",
                 "embeddedLanguages": {
+                    "text.html": "html",
                     "source.json": "json",
                     "source.css": "css",
                     "source.css.scss": "scss",
@@ -90,6 +91,7 @@
                 "scopeName": "text.html.volt",
                 "path": "./src/syntaxes/volt.tmLanguage",
                 "embeddedLanguages": {
+                    "text.html": "html",
                     "source.json": "json",
                     "source.css": "css",
                     "source.css.scss": "scss",
@@ -101,6 +103,7 @@
                 "scopeName": "text.js.volt",
                 "path": "./src/syntaxes/javascript.tmLanguage",
                 "embeddedLanguages": {
+                    "text.html": "html",
                     "source.json": "json",
                     "source.css": "css",
                     "source.css.scss": "scss",
