@@ -1,86 +1,75 @@
 {
-    "name": "volt",
-    "scopeName": "source.volt",
+    "name": "Volt",
+    "scopeName": "text.html.volt",
     "comment": "Volt Templates",
     "foldingStartMarker": "({%\\s*(block|filter|for|if|macro|raw))",
     "foldingStopMarker": "({%\\s*(endblock|endfilter|endfor|endif|endmacro|endraw)\\s*%})",
+    "injections": {
+      "text.html.volt - (meta.embedded | meta.tag | comment.block.volt), L:(text.html.volt meta.tag - comment.block.volt), L:(source.js.embedded.html - comment.block.volt)": {
+      "patterns": [
+        {
+          "begin": "({%)\\s*(raw)\\s*(%})",
+          "captures": {
+            "1": {
+              "name": "entity.other.volt.delimiter.tag"
+            },
+            "2": {
+              "name": "keyword.control.volt"
+            },
+            "3": {
+              "name": "entity.other.volt.delimiter.tag"
+            }
+          },
+          "end": "({%)\\s*(endraw)\\s*(%})",
+          "name": "comment.block.volt.raw"
+        },
+        {
+          "begin": "{#-?",
+          "captures": [
+            {
+              "name": "entity.other.volt.delimiter.comment"
+            }
+          ],
+          "end": "-?#}",
+          "name": "comment.block.volt"
+        },
+        {
+          "begin": "{{-?",
+          "captures": [
+            {
+              "name": "entity.other.volt.delimiter.variable"
+            }
+          ],
+          "end": "-?}}",
+          "name": "meta.scope.volt.variable",
+          "patterns": [
+            {
+              "include": "#expression"
+            }
+          ]
+        },
+        {
+          "begin": "{%-?",
+          "captures": [
+            {
+              "name": "entity.other.volt.delimiter.tag"
+            }
+          ],
+          "end": "-?%}",
+          "name": "meta.scope.volt.tag",
+          "patterns": [
+            {
+              "include": "#expression"
+            }
+          ]
+        }
+      ]
+    },
     "patterns": [
       {
-        "begin": "({%)\\s*(raw)\\s*(%})",
-        "captures": {
-          "1": {
-            "name": "entity.other.volt.delimiter.tag"
-          },
-          "2": {
-            "name": "keyword.control.volt"
-          },
-          "3": {
-            "name": "entity.other.volt.delimiter.tag"
-          }
-        },
-        "end": "({%)\\s*(endraw)\\s*(%})",
-        "name": "comment.block.volt.raw"
-      },
-      {
-        "begin": "{#-?",
-        "captures": [
-          {
-            "name": "entity.other.volt.delimiter.comment"
-          }
-        ],
-        "end": "-?#}",
-        "name": "comment.block.volt"
-      },
-      {
-        "begin": "{{-?",
-        "captures": [
-          {
-            "name": "entity.other.volt.delimiter.variable"
-          }
-        ],
-        "end": "-?}}",
-        "name": "meta.scope.volt.variable",
-        "patterns": [
-          {
-            "include": "#expression"
-          }
-        ]
-      },
-      {
-        "begin": "{%-?",
-        "captures": [
-          {
-            "name": "entity.other.volt.delimiter.tag"
-          }
-        ],
-        "end": "-?%}",
-        "name": "meta.scope.volt.tag",
-        "patterns": [
-          {
-            "include": "#expression"
-          }
-        ]
+        "include": "text.html.basic"
       }
     ],
-    "repository": {
-      "escaped_char": {
-        "match": "\\\\x[0-9A-F]{2}",
-        "name": "constant.character.escape.hex.volt"
-      },
-      "escaped_unicode_char": {
-        "captures": {
-          "1": {
-            "name": "constant.character.escape.unicode.16-bit-hex.volt"
-          },
-          "2": {
-            "name": "constant.character.escape.unicode.32-bit-hex.volt"
-          },
-          "3": {
-            "name": "constant.character.escape.unicode.name.volt"
-          }
-        },
-        "match": "(\\\\U[0-9A-Fa-f]{8})|(\\\\u[0-9A-Fa-f]{4})|(\\\\N\\{[a-zA-Z ]+\\})"
-      },
       "expression": {
         "patterns": [
           {
@@ -332,6 +321,685 @@
             "include": "#escaped_unicode_char"
           }
         ]
+      },
+      "heredoc": {
+        "patterns": [
+          {
+            "begin": "(?i)(?=<<<\\s*(\"?)([a-z_\\x{7f}-\\x{ff}][a-z0-9_\\x{7f}-\\x{ff}]*)(\\1)\\s*$)",
+            "end": "(?!\\G)",
+            "name": "string.unquoted.heredoc.php",
+            "patterns": [
+              {
+                "include": "#heredoc_interior"
+              }
+            ]
+          },
+          {
+            "begin": "(?=<<<\\s*'([a-zA-Z_]+[a-zA-Z0-9_]*)'\\s*$)",
+            "end": "(?!\\G)",
+            "name": "string.unquoted.nowdoc.php",
+            "patterns": [
+              {
+                "include": "#nowdoc_interior"
+              }
+            ]
+          }
+        ]
+      },
+        "heredoc_interior": {
+          "patterns": [
+            {
+              "begin": "(<<<)\\s*(\"?)(HTML)(\\2)(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "3": {
+                  "name": "keyword.operator.heredoc.php"
+                },
+                "5": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "text.html",
+              "end": "^(\\3)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.heredoc.php"
+                }
+              },
+              "name": "meta.embedded.html",
+              "patterns": [
+                {
+                  "include": "#interpolation"
+                },
+                {
+                  "include": "text.html.basic"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*(\"?)(XML)(\\2)(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "3": {
+                  "name": "keyword.operator.heredoc.php"
+                },
+                "5": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "text.xml",
+              "end": "^(\\3)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.heredoc.php"
+                }
+              },
+              "name": "meta.embedded.xml",
+              "patterns": [
+                {
+                  "include": "#interpolation"
+                },
+                {
+                  "include": "text.xml"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*(\"?)(SQL)(\\2)(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "3": {
+                  "name": "keyword.operator.heredoc.php"
+                },
+                "5": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "source.sql",
+              "end": "^(\\3)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.heredoc.php"
+                }
+              },
+              "name": "meta.embedded.sql",
+              "patterns": [
+                {
+                  "include": "#interpolation"
+                },
+                {
+                  "include": "source.sql"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*(\"?)(JAVASCRIPT|JS)(\\2)(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "3": {
+                  "name": "keyword.operator.heredoc.php"
+                },
+                "5": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "source.js",
+              "end": "^(\\3)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.heredoc.php"
+                }
+              },
+              "name": "meta.embedded.js",
+              "patterns": [
+                {
+                  "include": "#interpolation"
+                },
+                {
+                  "include": "source.js"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*(\"?)(JSON)(\\2)(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "3": {
+                  "name": "keyword.operator.heredoc.php"
+                },
+                "5": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "source.json",
+              "end": "^(\\3)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.heredoc.php"
+                }
+              },
+              "name": "meta.embedded.json",
+              "patterns": [
+                {
+                  "include": "#interpolation"
+                },
+                {
+                  "include": "source.json"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*(\"?)(CSS)(\\2)(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "3": {
+                  "name": "keyword.operator.heredoc.php"
+                },
+                "5": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "source.css",
+              "end": "^(\\3)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.heredoc.php"
+                }
+              },
+              "name": "meta.embedded.css",
+              "patterns": [
+                {
+                  "include": "#interpolation"
+                },
+                {
+                  "include": "source.css"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*(\"?)(REGEXP?)(\\2)(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "3": {
+                  "name": "keyword.operator.heredoc.php"
+                },
+                "5": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "string.regexp.heredoc.php",
+              "end": "^(\\3)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.heredoc.php"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#interpolation"
+                },
+                {
+                  "match": "(\\\\){1,2}[.$^\\[\\]{}]",
+                  "name": "constant.character.escape.regex.php"
+                },
+                {
+                  "captures": {
+                    "1": {
+                      "name": "punctuation.definition.arbitrary-repitition.php"
+                    },
+                    "3": {
+                      "name": "punctuation.definition.arbitrary-repitition.php"
+                    }
+                  },
+                  "match": "({)\\d+(,\\d+)?(})",
+                  "name": "string.regexp.arbitrary-repitition.php"
+                },
+                {
+                  "begin": "\\[(?:\\^?\\])?",
+                  "captures": {
+                    "0": {
+                      "name": "punctuation.definition.character-class.php"
+                    }
+                  },
+                  "end": "\\]",
+                  "name": "string.regexp.character-class.php",
+                  "patterns": [
+                    {
+                      "match": "\\\\[\\\\'\\[\\]]",
+                      "name": "constant.character.escape.php"
+                    }
+                  ]
+                },
+                {
+                  "match": "[$^+*]",
+                  "name": "keyword.operator.regexp.php"
+                },
+                {
+                  "begin": "(?i)(?<=^|\\s)(#)\\s(?=[[a-z0-9_\\x{7f}-\\x{ff},. \\t?!-][^\\x{00}-\\x{7f}]]*$)",
+                  "beginCaptures": {
+                    "1": {
+                      "name": "punctuation.definition.comment.php"
+                    }
+                  },
+                  "end": "$",
+                  "endCaptures": {
+                    "0": {
+                      "name": "punctuation.definition.comment.php"
+                    }
+                  },
+                  "name": "comment.line.number-sign.php"
+                }
+              ]
+            },
+            {
+              "begin": "(?i)(<<<)\\s*(\"?)([a-z_\\x{7f}-\\x{ff}]+[a-z0-9_\\x{7f}-\\x{ff}]*)(\\2)(\\s*)",
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "3": {
+                  "name": "keyword.operator.heredoc.php"
+                },
+                "5": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "end": "^(\\3)\\b",
+              "endCaptures": {
+                "1": {
+                  "name": "keyword.operator.heredoc.php"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#interpolation"
+                }
+              ]
+            }
+          ]
+        },
+        "nowdoc_interior": {
+          "patterns": [
+            {
+              "begin": "(<<<)\\s*'(HTML)'(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "2": {
+                  "name": "keyword.operator.nowdoc.php"
+                },
+                "3": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "text.html",
+              "end": "^(\\2)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.nowdoc.php"
+                }
+              },
+              "name": "meta.embedded.html",
+              "patterns": [
+                {
+                  "include": "text.html.basic"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*'(XML)'(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "2": {
+                  "name": "keyword.operator.nowdoc.php"
+                },
+                "3": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "text.xml",
+              "end": "^(\\2)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.nowdoc.php"
+                }
+              },
+              "name": "meta.embedded.xml",
+              "patterns": [
+                {
+                  "include": "text.xml"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*'(SQL)'(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "2": {
+                  "name": "keyword.operator.nowdoc.php"
+                },
+                "3": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "source.sql",
+              "end": "^(\\2)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.nowdoc.php"
+                }
+              },
+              "name": "meta.embedded.sql",
+              "patterns": [
+                {
+                  "include": "source.sql"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*'(JAVASCRIPT|JS)'(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "2": {
+                  "name": "keyword.operator.nowdoc.php"
+                },
+                "3": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "source.js",
+              "end": "^(\\2)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.nowdoc.php"
+                }
+              },
+              "name": "meta.embedded.js",
+              "patterns": [
+                {
+                  "include": "source.js"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*'(JSON)'(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "2": {
+                  "name": "keyword.operator.nowdoc.php"
+                },
+                "3": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "source.json",
+              "end": "^(\\2)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.nowdoc.php"
+                }
+              },
+              "name": "meta.embedded.json",
+              "patterns": [
+                {
+                  "include": "source.json"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*'(CSS)'(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "2": {
+                  "name": "keyword.operator.nowdoc.php"
+                },
+                "3": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "source.css",
+              "end": "^(\\2)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.nowdoc.php"
+                }
+              },
+              "name": "meta.embedded.css",
+              "patterns": [
+                {
+                  "include": "source.css"
+                }
+              ]
+            },
+            {
+              "begin": "(<<<)\\s*'(REGEXP?)'(\\s*)$",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.begin.php"
+                },
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "2": {
+                  "name": "keyword.operator.nowdoc.php"
+                },
+                "3": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "contentName": "string.regexp.nowdoc.php",
+              "end": "^(\\2)\\b",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.embedded.end.php"
+                },
+                "1": {
+                  "name": "keyword.operator.nowdoc.php"
+                }
+              },
+              "patterns": [
+                {
+                  "match": "(\\\\){1,2}[.$^\\[\\]{}]",
+                  "name": "constant.character.escape.regex.php"
+                },
+                {
+                  "captures": {
+                    "1": {
+                      "name": "punctuation.definition.arbitrary-repitition.php"
+                    },
+                    "3": {
+                      "name": "punctuation.definition.arbitrary-repitition.php"
+                    }
+                  },
+                  "match": "({)\\d+(,\\d+)?(})",
+                  "name": "string.regexp.arbitrary-repitition.php"
+                },
+                {
+                  "begin": "\\[(?:\\^?\\])?",
+                  "captures": {
+                    "0": {
+                      "name": "punctuation.definition.character-class.php"
+                    }
+                  },
+                  "end": "\\]",
+                  "name": "string.regexp.character-class.php",
+                  "patterns": [
+                    {
+                      "match": "\\\\[\\\\'\\[\\]]",
+                      "name": "constant.character.escape.php"
+                    }
+                  ]
+                },
+                {
+                  "match": "[$^+*]",
+                  "name": "keyword.operator.regexp.php"
+                },
+                {
+                  "begin": "(?i)(?<=^|\\s)(#)\\s(?=[[a-z0-9_\\x{7f}-\\x{ff},. \\t?!-][^\\x{00}-\\x{7f}]]*$)",
+                  "beginCaptures": {
+                    "1": {
+                      "name": "punctuation.definition.comment.php"
+                    }
+                  },
+                  "end": "$",
+                  "endCaptures": {
+                    "0": {
+                      "name": "punctuation.definition.comment.php"
+                    }
+                  },
+                  "name": "comment.line.number-sign.php"
+                }
+              ]
+            },
+            {
+              "begin": "(?i)(<<<)\\s*'([a-z_\\x{7f}-\\x{ff}]+[a-z0-9_\\x{7f}-\\x{ff}]*)'(\\s*)",
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.definition.string.php"
+                },
+                "2": {
+                  "name": "keyword.operator.nowdoc.php"
+                },
+                "3": {
+                  "name": "invalid.illegal.trailing-whitespace.php"
+                }
+              },
+              "end": "^(\\2)\\b",
+              "endCaptures": {
+                "1": {
+                  "name": "keyword.operator.nowdoc.php"
+                }
+              }
+            }
+          ]
+        }
+    },
+    "patterns": [
+      {
+        "include": "text.html.basic"
       }
-    }
+    ],
+    "repository": {
+      "escaped_char": {
+        "match": "\\\\x[0-9A-F]{2}",
+        "name": "constant.character.escape.hex.volt"
+      },
+      "escaped_unicode_char": {
+        "captures": {
+          "1": {
+            "name": "constant.character.escape.unicode.16-bit-hex.volt"
+          },
+          "2": {
+            "name": "constant.character.escape.unicode.32-bit-hex.volt"
+          },
+          "3": {
+            "name": "constant.character.escape.unicode.name.volt"
+          }
+        },
+        "match": "(\\\\U[0-9A-Fa-f]{8})|(\\\\u[0-9A-Fa-f]{4})|(\\\\N\\{[a-zA-Z ]+\\})"
+      }
   }
+}

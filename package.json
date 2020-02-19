@@ -36,87 +36,37 @@
         "beautify"
     ],
     "activationEvents": [
-        "onLanguage:volt",
-        "onLanguage:html.volt",
-        "onLanguage:js.volt",
-        "onLanguage:html",
-        "onLanguage:javascript"
+        "onLanguage:volt"
     ],
     "main": "./extension/index",
     "contributes": {
         "languages": [
             {
                 "id": "volt",
-                "aliases": ["Volt Raw", "volt-raw"],
-                "extensions": [],
-                "configuration": "./src/languages/volt.configuration.json"
-            },
-            {
-                "id": "html.volt",
                 "aliases": [
-                    "Volt (HTML)"
+                    "Phalcon Volt",
+                    "Volt",
+                    "volt"
                 ],
                 "extensions": [
-                    ".volt",
-                    ".html.volt"
+                    ".volt"
                 ],
-                "configuration": "./src/languages/volt.configuration.json"
-            },
-            {
-                "id": "js.volt",
-                "aliases": [
-                    "Js (Volt)"
-                ],
-                "extensions": [
-                    ".js.volt"
-                ],
-                "configuration": "./src/languages/volt.configuration.json"
+                "configuration": "./languages/volt.configuration.json"
             }
         ],
         "grammars": [
             {
                 "language": "volt",
-                "scopeName": "source.volt",
-                "path": "./src/syntaxes/volt.tmLanguage.json"
-            },
-            {
-                "language": "html.volt",
                 "scopeName": "text.html.volt",
-                "path": "./src/syntaxes/volt-html.tmLanguage.json",
+                "path": "./src/syntaxes/volt.tmLanguage.json",
                 "embeddedLanguages": {
-                    "text.html": "html",
-                    "source.css": "css",
-                    "source.js": "javascript"
-                },
-                "tokenTypes": {
-                    "meta.tag string.quoted": "other"
-                }
-            },
-            {
-                "language": "js.volt",
-                "scopeName": "source.js.volt",
-                "path": "./src/syntaxes/volt-js.tmLanguage.json",
-                "embeddedLanguages": {
-                    "text.html": "html",
-                    "source.css": "css",
-                    "source.js": "javascript"
-                },
-                "tokenTypes": {
-                    "meta.tag string.quoted": "other"
+                    "meta.embedded.block.html": "html"
                 }
             }
         ],
         "snippets": [
             {
                 "language": "volt",
-                "path": "./src/snippets/volt.json"
-            },
-            {
-                "language": "html.volt",
-                "path": "./src/snippets/volt.json"
-            },
-            {
-                "language": "js.volt",
                 "path": "./src/snippets/volt.json"
             }
         ],
@@ -391,6 +341,10 @@
         "prettydiff": "^101.2.6",
         "rollup": "^1.26.3",
         "rollup-plugin-babel": "^4.3.3",
-        "rollup-plugin-json": "^4.0.0"
+        "rollup-plugin-json": "^4.0.0",
+        "vscode-css-languageservice": "^3.0.13",
+        "vscode-html-languageservice": "^2.1.12",
+        "vscode-languageclient": "^3.5.1",
+        "vscode-languageserver-types": "^3.14.0"
     }
 }
