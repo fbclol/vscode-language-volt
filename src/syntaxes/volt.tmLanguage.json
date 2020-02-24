@@ -2,8 +2,9 @@
     "name": "Volt",
     "scopeName": "text.html.volt",
     "comment": "Volt Templates",
-    "foldingStartMarker": "({%\\s*(block|filter|for|if|macro|raw))",
-    "foldingStopMarker": "({%\\s*(endblock|endfilter|endfor|endif|endmacro|endraw)\\s*%})",
+    "firstLineMatch": "^{% extends [\"'][^\"']+[\"'] %}",
+    "foldingStartMarker": "(<(?i:(head|table|tr|div|style|script|ul|ol|form|dl))\\b.*?>|{%\\s*(block|filter|for|if|macro|raw))",
+    "foldingStopMarker": "(<\/(?i:(head|table|tr|div|style|script|ul|ol|form|dl))\\b.*?>|{%\\s*(endblock|endfilter|endfor|endif|endmacro|endraw)\\s*%})",
     "injections": {
       "text.html.volt - (meta.embedded | meta.tag | comment.block.volt), L:(text.html.volt meta.tag - comment.block.volt), L:(source.js.embedded.html - comment.block.volt)": {
       "patterns": [
