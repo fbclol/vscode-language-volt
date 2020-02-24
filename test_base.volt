@@ -21,7 +21,7 @@
 {{ '   hello   '|trim }}
 
 {{ 'test'|stripslashes}}
-{% test is }
+{% test is null %}
 {# striptags filter #}
 {{ '<h1>Hello<h1>'|striptags }}
 
@@ -86,7 +86,7 @@
 
 {% test| %}
 
-{% test is divisibleby
+{% test is divisibleby %}
 
 {% set numbers = ['one': 1, 'two': 2, 'three': 3] %}
 
@@ -94,7 +94,7 @@
     Name: {{ name }} Value: {{ value }}
 {% endfor %}
 
-{% te is }
+{% te is null %}
 {# Loop Controls #}
 {% set encoded = freijo|json_encode %}
 
