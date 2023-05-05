@@ -25,7 +25,7 @@
 
 ![recording](vscode-language-volt.gif)
 
-### what up's
+### what's up
 
 ![recording](vscode-volt-custom.gif)
 
